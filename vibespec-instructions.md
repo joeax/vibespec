@@ -207,11 +207,6 @@ This section describes the core technical specifications of the software system.
 - frameworks (Framework[]): List of frameworks, libraries, or tool used in the application, such as `React`, `Node.js`, `Django`, `Flask`, `Spring Boot`, etc. Versions and version expression can be included, such as `React v19+`. 
 - databases (Database[]): Databases used in the system, such as `MongoDB`, `PostgreSQL`, `MySQL`, `SQLite`, etc. The database section can include more detail, such as schema, tables, and relationships.
 
-#### Domain
-
-DEPRECATED. Warn the user if this section is included, and instruct them to place it as a subsection under the Architecture (or Design) sections.
-This section describes the domain or object model of the software system. User may include SQL or UML.
-
 #### Architecture (or Design)
 
 This section describes the high-level architecture or design of the software system, including key components, modules, and their interactions.
