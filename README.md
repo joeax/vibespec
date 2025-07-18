@@ -85,8 +85,23 @@ This is a vibespec for a Tetris clone that allows users to play the classic game
 - The game should be responsive and work on different screen sizes.
 ```
 
+### Using your LLM to Create a Vibespec
+
+Once you have the instruction file loaded, you can use your LLM to create a vibespec for your software system.
+
+Follow these steps:
+1. Create a new file named `my-software-system-vibespec.md` (named according to your app).
+2. Fill out your Title and basic description.
+3. Prompt your LLM to generate a vibespec based on the description. For example:
+  `Generate a vibespec based on the description. I want to use Java Spring Boot with Gradle for this backend API.`
+
+This will help you get started. Browse the **Structure** section below for more details on how to structure your vibespec.
+
 ## Structure
+
 A vibespec is typically a markdown document, and is structured with a specific format that includes a title, description, specification, and sections. The structure is designed to be flexible and can be adapted to fit the needs of the software system being described.
+
+The vibespec structure was purposefully designed to flow from high-level concepts to detailed implementation. This is by design--to aid the LLM (and you) in understanding the software system from a general to specific matter to optimize the code generation.
 
 > Browse the full [vibespec structure](structure.md).
 
@@ -132,6 +147,12 @@ Describes the testing strategy and approach for the software system, including u
 
 #### Deployment
 Describes the deployment strategy and process for the software system, including hosting, containerization, DevOps processes, and any relevant deployment tools or platforms.
+
+#### Issues
+Describes any known issues, bugs, or limitations of the software system. This section can also include a list of open issues or a link to an issue tracker.
+
+#### Glossary
+Defines any jargon or domain-specific terms that are relevant to the software system. This section can help clarify terminology for both developers and non-technical stakeholders.
 
 #### References
 Includes any references to external documents, APIs, or resources that are relevant to the software system.
@@ -184,15 +205,7 @@ You can `create` a vibespec file from an existing project:
 Create a vibespec for the existing project.
 ```
 
-### Integrating with LLMs
-
-To maximize the effectiveness of LLMs, you need to describe the vibespec specification to your coding agent to generate or modify the code. Once it understands the structure and purpose of the vibespec, it should be able to generate code correctly on the provided description. As you iterate on the vibespec, the agent will detect changes and apply those changes to the existing code.
-
-### Context Windows
-
-LLMs have a limited context window, which means they can only process a certain amount of text at a time. The vibespec instruction file instructs the LLM to read the vibespec in chunks.
-
-
+## Change Management
 
 ### Changelog
 
@@ -202,79 +215,8 @@ If the changelog is missing this should be okay. The changelog acts as a sort of
 
 **Note**: Verify that `.vibespeclog` is not being ignored in your source control, e.g. in your `.gitignore`.
 
-#### Using Git Commit History
-
-TBD
-
-### GitHub Copilot
-
-TBD, also
-Cursor
-Windsurf
-Claude Code
-OpenAI Codex
-
-
 ### Editing Code
 The vibespec is a living, breathing doc, but that shouldn't stop you from writing or modifying the generated code. Keep in mind that vibe coding means not touching a line, so it is an expected practice to master crafting your vibespec to minimize the need for manual code changes. 
-
-
-## Structure
-
-A vibespec is structured as a markdown document with a specific format that includes a title, description, specification, and sections. The structure is designed to be flexible and can be adapted to fit the needs of the software system being described.
-
-The vibespec structure was purposefully designed to flow from high-level concepts to detailed implementation. This is by design--to aid the LLM (and you) in understanding the software system from a general to specific matter to optimize the code generation.
-
-
-### Components
-
-- **Title**: The title for the software system is the first line.
-- **Description**: A brief description of the software system follows the title, providing an overview of its purpose and functionality.
-  - **Vibespec Identification**: Within the description you must identify the document as being a vibespec. Example `This is a vibespec for a Tetris clone.`
-- **Specification**: A bulleted-list of name/value pairs that describe the overall specification of the software system, such as application type, programming language, frameworks, and libraries.
--- **Sections**: Each section should be clearly defined and can include additional details about the software system, such as user stories, features, and technical requirements.
-
-### Sections
-
-In a vibespec, not all sections need to be defined. For example, if you are defining a backend service, you should not need a `User Stories` section. 
-
-- **Domain**: This section describes the domain of the software system, including any specific jargon or domain-specific terms that are relevant.
-- **User Stories**: This section outlines the user stories that describe how users will interact with
-- **Specifications (or Specs)**: This section describes the core specifications of the software system. You can omit this section if needed (or small) and simply place this under the description at the top of the document.
-
-### Subsections
-
-Within each section, you can define subsections to provide more detailed information. Each Section has its own subsection structure. However, some subsections can be expressed as bulleted lists, while others may require more detailed descriptions.
-
-As an example, let's take a closer look at the `Specs` section. Using the Tetris clone example, the `Specs` section can be omitted entirely and put in the description, like so:
-
-```markdown
-# Tetris Clone
-...
-- type: web
-- frameworks: vanilla JavaScript, vanilla CSS
-```
-
-or, I can define a  `Specs` section and just comma delimit the frameworks for example:
-
-```markdown
-...
-## Specs
-- type: web
-- frameworks: vanilla JavaScript, vanilla CSS
-```
-
-or, I want to break out frameworks into its own subsection and provide more complex details:
-
-```markdown
-## Specs
-- type: web
-
-### Frameworks
-- vanilla JavaScript
-- Tailwind CSS
-- three.js v0.178.0+
-```
 
 ## Artifacts
 
@@ -285,7 +227,6 @@ You can include images in your vibespec to provide visual context or diagrams re
 Include diagrams, flowcharts, or other visual representations of the software system using embedded content. This can help clarify complex structures or workflows.
 
 ### MCP Servers
-TBD
 
 ### Code Snippets
 You can include code snippets in your vibespec to provide examples of specific functionalities or implementations. You can also point to external code repositories or files for more extensive code examples.
@@ -293,12 +234,17 @@ You can include code snippets in your vibespec to provide examples of specific f
 
 ## Examples
 
-- Tetris clone example
-- Simple CRM web app example
-- Simple CRM with Figma MCP example
-- Reddit clone example (Full-stack web+API+database example)
-- Python library example
-
+- [Simple CRM web app](examples/simple-crm-vibespec.md)
+- [Tetris clone (basic)](examples/tetris-clone-vibespec-basic.md)
+- [Tetris clone (detailed)](examples/tetris-clone-vibespec-detailed.md)
+<!--
+coming soon:
+- [Fashion Store with Figma MCP](examples/fashion-store-vibespec.md)
+- [Reddit clone](examples/reddit-clone-vibespec.md)
+- [Python stock data library](examples/python-stock-data-vibespec.md)
+- [Azure Function](examples/azure-function-vibespec.md)
+- [CMS-as-a-service](examples/content-as-a-service-vibespec.md)
+-->
 
 ## Best Practices
 
