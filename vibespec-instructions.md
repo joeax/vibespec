@@ -336,12 +336,6 @@ The vibespec file structure follows this format. The examples use markdown but t
 ### Sections
 This section describes the sections that can be included in a vibespec file. None of the sections are explicitly required, and some may not apply to certain application types. Alternate names for sections are provided in parentheses. The LLM should be able to understand these alternate names and treat them as equivalent. Some sections have well-defined subsections, which are described with each Section definition.
 
-<!-->
-There are 2 types of sections:
-- Descriptive: Sections that describe the system i.e. "the what". Includes: Specifications, Architecture, Features, Requirements, Considerations, Assumptions, User Stories, References.
-- Implementation: Sections that describe the implementation details i.e. "the how". Includes: Setup, UI, API, Database, Testing, Deployment. Treat all requirements in these sections as first-class requirements, not as optional or "nice-to-have."
--->
-
 #### About
 This section lists the meta details, such as version, author, date, and any other relevant metadata. Note: These properties mostly for humans and need to be updated manually or with external tooling.
 
@@ -505,6 +499,9 @@ Note: This list is non-comprehensive and can be extended with additional subsect
 
 #### Issues
 This section describes any known issues, bugs, or limitations of the code that was generated. It can also include any technical debt or areas for improvement. Review these when they exist and do your best to find a solution and fix these issues. Ask the user for further clarification if needed.
+
+#### Glossary
+This section provides definitions for any technical terms, jargon, or acronyms used in the vibespec.
 
 #### References
 This section lists any references or resources that were used in the creation of the document or that provide additional context. This will support MCP servers in the future (currently planning).

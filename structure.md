@@ -228,6 +228,9 @@ Artifacts should be specified as direct subsections of the Implementation sectio
 [Lists all known issues of the code that was generated, including bugs, performance concerns, or areas needing improvement.]
 - In `useCustomers.ts`, when the API returns a 401, the error is not handled properly, leading to an unhandled promise rejection.
 
+## Glossary
+[Defines any technical terms, jargon, or acronyms used in the vibespec.]
+
 ## References
 [Lists of references, such as documentation, external resources, or related projects.]
 
