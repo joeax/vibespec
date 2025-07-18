@@ -48,8 +48,8 @@ When running the `run`, `generate` or `update` command:
 #### Generating or Updating Code
 - If the user has provided special instructions containing code conventions or standards, always follow those instructions. Those should always supersede any default conventions.
 - Follow best practices and common conventions for the specified stack. If details are missing (e.g., project structure, build tool, or configuration), use widely accepted defaults (e.g., use Vite for React 19+ projects).
-- If any section of the vibespec is ambiguous, incomplete, or missing, use best practices and reasonable assumptions for the given context.
-- Warn the user before making significant assumptions or decisions that may impact the generated code or project structure.
+- If any section of the vibespec is ambiguous, incomplete, or missing, use best practices and reasonable assumptions for the given context. The agent is expected to fill in missing implementation details, project structure, or configuration using widely accepted conventions and patterns for the specified frameworks and libraries.
+- Warn the user before making significant assumptions or decisions that may impact the existing code or project structure.
 - Ensure that generated code is maintainable, secure, and scalable, and that it aligns with the specifications and intent of the vibespec.
 
 #### Partial Updates
@@ -71,6 +71,7 @@ When running the `setup` command:
 - If the coding agent does not support curring terminal commands, warn the user then ask if they want to proceed with the initial code generation.
 - If the Setup section is incomplete, infer and create the smallest working project structure and install only the essential dependencies required for the specified languages and frameworks in the Specifications section (e.g., if React 19 and TypeScript are specified, install React 19, TypeScript, and Vite).
 - By default, scaffold the project in the current directory (where the vibespec file resides). An empty folder is not required unless there is a risk of overwriting important existing files during initial setup. Warn the user if any files may be overwritten and request confirmation before proceeding.
+- **Do not create a new subfolder for the project unless the vibespec or user explicitly requests it.**
 - Detect the user's operating system and shell (e.g., PowerShell on Windows, bash/zsh on macOS/Linux) and generate setup commands that are compatible with that environment. If unsure, ask the user to specify their preferred shell.
 - The Setup section is only executed on initial code generation, or when setup-related changes are detected in the vibespec. If the project already exists and no setup changes are present, skip the setup steps. If the project already exists but the detected dependencies or configuration conflict with the vibespec, warn the user and ask if they wish to update the dependencies or configuration to match the vibespec.
 - Use best practices for the specified languages and frameworks to scaffold the project and install dependencies.
@@ -445,7 +446,7 @@ It can include:
 - **Configuration:** Instructions for configuring the software, such as environment variables, configuration files, or command-line options.
 
 #### Folder Structure
-This section describes the folder structure of the software system, including the organization of files and directories. Present this as a tree structure or a nested list of directories and files. 
+This section describes the folder structure of the software system, including the organization of files and directories. This will usually be presented as a tree structure or a nested list of directories and files. It may not contain all folders and file patterns, so do you best to follow the intent of the structure.
 
 #### UI
 This section describes the user interface (UI) design, including any wireframes, mockups, or design principles. Implement all described UI/UX features, even if only mentioned in passing (e.g., tooltips, color schemes, modal behavior). When the application type is a frontend application or library like a web or mobile app, this section should be included, otherwise Warn the user.
@@ -474,10 +475,10 @@ Note: This list is non-comprehensive and can be extended with additional subsect
 When the application type is `api` or the software includes a backend, or otherwise incorporates a database, this section describes the database design, including schema, tables, and relationships.
 
 #### Implementation
-This section describes the concrete implementation details, the "how" of the software system. It can include details about the specific code artifacts used in the implementation. Include this section if you want to steer the exact implementation details that the LLM will use to generate code.
+This section describes the concrete implementation details, the "how" of the software system. It can include details about the specific code artifacts used in the implementation. When included, use this section to steer the exact implementation details. When missing or incomplete, use your best judgement and best practices to implement the system according to the vibespec.
 
 ##### Subsections
-Each subsection describes a specific code artifact of the implementation, such as Classes, Interfaces, Types, Functions, or Modules or more.
+Each subsection describes a specific code artifact of the implementation, such as Classes, Interfaces, Types, Functions, or Modules or more. They may include exact file names like `Component.tsx` or just the artifact name like `IComponent`.
 
 #### Testing (or Tests)
 This section describes the testing strategy for the software system, including unit tests, integration tests, and end-to-end tests.
@@ -495,14 +496,15 @@ Note: This list is non-comprehensive and can be extended with additional subsect
 This section describes how the software system will be deployed, including any deployment environments, tools, or
 processes. 
 
-Note: This section is a work in progress and will be updated in the future.
-
 ##### Subsections
 - Environments: A list of deployment environments, such as `development`, `staging`, or `production`.
 - Tools: A list of tools or services used for deployment, such as `Docker`, `Kubernetes`
 - Deployment Targets: Specifics on where code artifacts will be deployed, such as `AWS`, `Azure`, `GCP`, etc.
 - DevOps: A description of the DevOps practices in place.
 Note: This list is non-comprehensive and can be extended with additional subsections as needed.
+
+#### Issues
+This section describes any known issues, bugs, or limitations of the code that was generated. It can also include any technical debt or areas for improvement. Review these when they exist and do your best to find a solution and fix these issues. Ask the user for further clarification if needed.
 
 #### References
 This section lists any references or resources that were used in the creation of the document or that provide additional context. This will support MCP servers in the future (currently planning).

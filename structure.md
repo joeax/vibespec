@@ -22,7 +22,7 @@ This is a vibespec. This description provides a brief overview of the software s
 ### Dependencies
 - Foo
 - Bar v13.0.1+
-- Baz v2.2.1
+- Baz ^2.2.1
 
 ## Features
 - [Feature 1]
@@ -67,19 +67,6 @@ As a [user type], I want to [action] so that [benefit].
 ## Architecture | Application | Application Design | Application Design | System Design
 [Describes the high-level structure of the software system, including its components, modules, and their interactions. Should include diagrams, such as component diagrams, sequence diagrams, or deployment diagrams, to illustrate the architecture. Describes software patterns like facade, inversion of control/dependency injection, etc.]
 
-## Folder Structure
-[Describes the folder structure of the project. Use a tree view (below) or nested list.]
-```
-.
-├── src
-│   ├── main.py
-│   └── utils.py
-├── tests
-│   ├── test_main.py
-│   └── test_utils.py
-└── .env
-```
-
 ## Data | Data Model | Data Design | Domain
 [Describes the entities, relationships, and data structures used in the software system. It can include details about the database schema, data models, or any other relevant data design aspects.]
 
@@ -100,6 +87,19 @@ As a [user type], I want to [action] so that [benefit].
 - Entity1 has a one-to-many relationship with Entity2.
 
 [This section can include diagrams, such as ER diagrams or UML class diagrams, to visually represent the data model.]
+
+## Folder Structure
+[Describes the folder structure of the project. Use a tree view (below) or nested list.]
+```
+.
+├── src
+│   ├── main.py
+│   └── utils.py
+├── tests
+│   ├── test_main.py
+│   └── test_utils.py
+└── .env
+```
 
 ## Setup
 [List of project installation and setup instructions.]
@@ -140,7 +140,7 @@ List of screens in the application, for desktop or mobile applications.
 *[Note: This section discusses the databases themselves. For the data design, refer to the Data section above.]*
 
 ## Implementation
-[Describes the concrete implementation details, the "how" of the software system. It can include details about the specific code artifacts used in the implementation.]
+[Describes the concrete implementation details, the "how" of the software system. It can include details about the specific code artifacts used in the implementation. **This section is primarily for developers who understand code. For non-developers, the sections above should provide enough information to understand the system's functionality without needing to direct the implementation details.**]
 
 ### [Code Artifact]
 Artifacts in this list should be specified as direct subsections of the Implementation section, with one or more of these as applicable to your implementation:
@@ -201,8 +201,8 @@ Artifacts should be specified as direct subsections of the Implementation sectio
 - [Component2]: Description of component 2.
 
 ### Controllers
-- [Controller1]: Description of controller 1.
-- [Controller2]: Description of controller 2.
+- [Controller1.java]: Description of controller 1.
+- [Controller2.java]: Description of controller 2.
 
 ### Pages
 - [Page1.aspx]: Description of page 1.
@@ -224,6 +224,10 @@ Artifacts should be specified as direct subsections of the Implementation sectio
 [Describes how the software system is deployed, including the environment setup, deployment scripts, and any specific deployment considerations.]
 - Deployment environment: [e.g., AWS, Azure, on-premises]
 
+## Issues
+[Lists all known issues of the code that was generated, including bugs, performance concerns, or areas needing improvement.]
+- In `useCustomers.ts`, when the API returns a 401, the error is not handled properly, leading to an unhandled promise rejection.
+
 ## References
 [Lists of references, such as documentation, external resources, or related projects.]
 
@@ -233,13 +237,3 @@ Artifacts should be specified as direct subsections of the Implementation sectio
 
 ### External | Online
 - [Link to related document or resource](https://example.com)
-
-<!--
-
-artifacts:
-- Hooks
-- Use case diagram
-
-
-
->
