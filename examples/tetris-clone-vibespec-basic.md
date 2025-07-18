@@ -1,0 +1,3 @@
+# Tetris Clone
+
+This is a vibespec for a Tetris clone game. The game will be implemented using vanilla JavaScript and CSS and run in an HTML canvas. The game will be a simple, minimalist game that focuses on the core Tetris gameplay mechanics. The game can be played with a keyboard, using the arrow keys for movement, and the Z (counterclockwise) and X (clockwise) keys for rotation. Using the up arrow key will instantly drop the piece to the bottom of the screen. The game will have a simple scoring system based on the number of lines cleared. The game will progressively increase in speed as the player clears more lines.
