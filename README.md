@@ -207,13 +207,9 @@ Create a vibespec for the existing project.
 
 ## Change Management
 
-### Changelog
+### Execution Plan
 
-When applying changes from a vibespec, the LLM will generate a changelog file named `.vibespeclog` that will track changes made to the codebase based on the vibespec. This file will include a summary of the changes, the date and time of the change, and any relevant details about the modifications.
-
-If the changelog is missing this should be okay. The changelog acts as a sort of cache for the LLM to understand the changes made to the vibespec. If you are using a version control system, you can also use the commit history as a changelog.
-
-**Note**: Verify that `.vibespeclog` is not being ignored in your source control, e.g. in your `.gitignore`.
+When applying changes from a vibespec, the LLM will generate a execution plan in the `.vibespec` folder of the project. This will allow the agent to track changes being made to the codebase based as it goes. This file will include a summary of the changes, the date and time of the change, and any relevant details about the modifications.
 
 ### Editing Code
 The vibespec is a living, breathing doc, but that shouldn't stop you from writing or modifying the generated code. Keep in mind that vibe coding means not touching a line, so it is an expected practice to master crafting your vibespec to minimize the need for manual code changes. 
@@ -227,10 +223,22 @@ You can include images in your vibespec to provide visual context or diagrams re
 Include diagrams, flowcharts, or other visual representations of the software system using embedded content. This can help clarify complex structures or workflows.
 
 ### MCP Servers
+Explicitly reference MCP servers that you have already configured in your IDE or agent along with key command words for that MCP server. For example, you can reference a [Figma MCP server](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server) for design mockups or a GitHub MCP server for code repositories.
+
+```markdown
+## UI
+### Design Mockups
+Page wireframes are in these Figma node IDs:
+- `123:456`
+- `123:457`
+- `123:458`
+```
 
 ### Code Snippets
 You can include code snippets in your vibespec to provide examples of specific functionalities or implementations. You can also point to external code repositories or files for more extensive code examples.
 
+### Special Tokens
+Each coding agent has built-in special tokens that can be used to control the behavior of the agent. For example, in GitHub Copilot, you can access special agents like `@workspace` or variables like `#codebase` to refer to the current codebase. Use this as you normally would in the chat window.
 
 ## Examples
 
