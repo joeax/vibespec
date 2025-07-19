@@ -1,3 +1,8 @@
+html, body, #page-wrapper {
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   padding: 0;
@@ -5,18 +10,16 @@ body {
   color: #fff;
   font-family: 'Segoe UI', Arial, sans-serif;
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100vw;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100vw;
-  height: 100vh;
-  justify-content: center;
+  min-height: 100vh;
+  justify-content: flex-start;
+  padding-top: 2rem;
 }
 
 header {
@@ -31,18 +34,71 @@ header {
   margin-top: 0.5rem;
 }
 
+
 main {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   gap: 2rem;
+  width: 100%;
+  justify-content: center;
 }
+
+.game-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 
 #game {
   background: #333;
   border: 4px solid #444;
   border-radius: 8px;
   display: block;
+  margin-bottom: 1rem;
+  max-width: 90vw;
+  height: auto;
+}
+
+/* Controls fill canvas width and use dark gray/white */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 300px;
+}
+.controls button {
+  background: #444;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  flex: 1 1 0;
+  padding: 0.7em 0;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  min-width: 0;
+}
+.controls button:active {
+  background: #666;
+}
+
+#restart {
+  background: #444;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.7em 1.2em;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 1rem;
+}
+#restart:active {
+  background: #666;
 }
 
 .next-piece {
@@ -88,11 +144,17 @@ main {
     flex-direction: column;
     align-items: center;
   }
+  .game-area {
+    width: 100vw;
+    align-items: center;
+  }
   #game {
     width: 90vw;
-    height: 60vw;
+    height: auto;
+    aspect-ratio: 1/2;
     max-width: 300px;
     max-height: 600px;
+    margin-bottom: 1rem;
   }
   #next {
     width: 60px;

@@ -1,5 +1,7 @@
 // tetris.js
 // Main game logic, rendering, and input handling
+let touchStartX = null;
+let touchStartY = null;
 const COLS = 10;
 const ROWS = 20;
 const BLOCK_SIZE = 30;
@@ -19,8 +21,11 @@ let currentX = 0;
 let currentY = 0;
 let rotationState = 0;
 
+
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
+
+// ...existing code...
 
 function randomTetromino() {
   const keys = Object.keys(TETROMINOS);
@@ -190,6 +195,14 @@ function rotatePiece(clockwise = true) {
   }
 }
 
+// ...existing code...
+
+
+document.getElementById('restart').addEventListener('click', resetGame);
+
+// --- All event listeners at the bottom for clarity ---
+
+// Keyboard controls
 document.addEventListener('keydown', (e) => {
   if (isGameOver || isPaused) return;
   switch (e.key) {
@@ -216,9 +229,95 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Pause/resume on canvas click
-canvas.addEventListener('click', () => {
+// Touch controls (mobile swipe/drag/tap)
+canvas.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 1) {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }
+}, { passive: false });
+
+canvas.addEventListener('touchmove', (e) => {
+  if (touchStartX === null || touchStartY === null) return;
+  const touch = e.touches[0];
+  const dx = touch.clientX - touchStartX;
+  const dy = touch.clientY - touchStartY;
+  // Prevent pinch-to-zoom
+  if (e.touches.length > 1) {
+    e.preventDefault();
+    return;
+  }
+  // Horizontal swipe: move
+  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 30) {
+    if (dx > 0) {
+      move(1);
+    } else {
+      move(-1);
+    }
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+  }
+  // Vertical swipe down: hard drop
+  if (Math.abs(dy) > Math.abs(dx) && dy > 30) {
+    hardDrop();
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+  }
+}, { passive: false });
+
+canvas.addEventListener('touchend', (e) => {
+  // Tap: rotate clockwise if no significant movement
+  if (touchStartX !== null && touchStartY !== null && e.changedTouches.length === 1) {
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - touchStartX;
+    const dy = touch.clientY - touchStartY;
+    if (Math.abs(dx) < 10 && Math.abs(dy) < 10) {
+      rotatePiece(true);
+    }
+  }
+  touchStartX = null;
+  touchStartY = null;
+});
+
+// Prevent pinch-to-zoom on mobile (gesturestart)
+window.addEventListener('gesturestart', function(e) {
+  e.preventDefault();
+});
+
+// Also prevent double-tap zoom
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function(e) {
+  const now = Date.now();
+  if (now - lastTouchEnd <= 300) {
+    e.preventDefault();
+  }
+  lastTouchEnd = now;
+}, false);
+
+// Prevent double rotate on mobile: only fire click if not after a touch
+let recentTouch = false;
+canvas.addEventListener('touchend', () => {
+  recentTouch = true;
+  setTimeout(() => { recentTouch = false; }, 500);
+});
+canvas.addEventListener('click', (e) => {
+  // Only rotate if not paused/game over and not a button click, and not after a touch event
+  if (!isPaused && !isGameOver && e.target === canvas && !recentTouch) {
+    rotatePiece(true);
+  }
+});
+
+// Pause/resume on click outside the canvas
+document.getElementById('page-wrapper')?.addEventListener('click', (e) => {
   if (isGameOver) return;
+  // Only pause/resume if click is NOT on the canvas or a button
+  const target = e.target;
+  if (
+    target === canvas ||
+    target.closest('.controls') ||
+    target.id === 'restart' ||
+    target.closest('.next-piece')
+  ) return;
   isPaused = !isPaused;
   if (!isPaused) {
     // Resume drop timer
@@ -242,6 +341,20 @@ canvas.addEventListener('click', () => {
   }
 });
 
-document.getElementById('restart').addEventListener('click', resetGame);
-
-window.onload = resetGame;
+// On-screen control buttons
+window.onload = () => {
+  resetGame();
+  // On-screen control buttons (wait for DOM)
+  document.getElementById('rotate-ccw')?.addEventListener('click', () => {
+    if (!isGameOver && !isPaused) rotatePiece(false);
+  });
+  document.getElementById('rotate-cw')?.addEventListener('click', () => {
+    if (!isGameOver && !isPaused) rotatePiece(true);
+  });
+  document.getElementById('soft-drop')?.addEventListener('click', () => {
+    if (!isGameOver && !isPaused) softDrop();
+  });
+  document.getElementById('hard-drop')?.addEventListener('click', () => {
+    if (!isGameOver && !isPaused) hardDrop();
+  });
+};
