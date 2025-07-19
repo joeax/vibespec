@@ -1,0 +1,101 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #222;
+  color: #fff;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+}
+
+header {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.scoreboard {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+#game {
+  background: #333;
+  border: 4px solid #444;
+  border-radius: 8px;
+  display: block;
+}
+
+.next-piece {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#next {
+  background: #333;
+  border: 2px solid #444;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
+#game-over {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(34, 34, 34, 0.95);
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  text-align: center;
+  z-index: 10;
+}
+
+#game-over.hidden {
+  display: none;
+}
+
+/* Tetromino colors */
+.tetromino-I { background: #00f0f0; }
+.tetromino-O { background: #f0f000; }
+.tetromino-T { background: #a000f0; }
+.tetromino-S { background: #00f000; }
+.tetromino-Z { background: #f00000; }
+.tetromino-J { background: #0000f0; }
+.tetromino-L { background: #f0a000; }
+
+@media (max-width: 600px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+  #game {
+    width: 90vw;
+    height: 60vw;
+    max-width: 300px;
+    max-height: 600px;
+  }
+  #next {
+    width: 60px;
+    height: 60px;
+  }
+}
