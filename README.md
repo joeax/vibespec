@@ -212,7 +212,7 @@ Create a vibespec for the existing project.
 When applying changes from a vibespec, the LLM will generate a execution plan in the `.vibespec` folder of the project. This will allow the agent to track changes being made to the codebase based as it goes. This file will include a summary of the changes, the date and time of the change, and any relevant details about the modifications.
 
 ### Editing Code
-The vibespec is a living, breathing doc, but that shouldn't stop you from writing or modifying the generated code. Keep in mind that vibe coding means not touching a line, so it is an expected practice to master crafting your vibespec to minimize the need for manual code changes. 
+The vibespec is a living, breathing doc, but that shouldn't stop you from modifying the generated code. Although the term *vibe coding* means not touching a line, in the real world to build a production-ready application, you will at some point need to modify your own code. The vibespec is designed to be flexible and can be updated as needed to reflect changes in the software system. 
 
 ## Artifacts
 
@@ -260,11 +260,8 @@ coming soon:
 - Ask the LLM to validate your vibespec and describe the changes it will make before implementing them. This will help you troubleshoot your vibespec (i.e. if context window is exceeded) before executing on it.
 - The sections are defined to have some overlap by design, however it is best to avoid repeating information. Use intra-document links to reference other sections or subsections when needed.
 - Split complex systems into multiple vibespecs using references, each focusing on a specific aspect of the system. This allows for better organization and easier management of the specifications.
-- Place all your vibespec files in a common folder e.g. `docs/`. This allows you to easily reference other vibespecs in your project.
-- Commit code changes by the LLM often. Better yet, commit vibespec changes and code changes together. This allows the LLM to understand the context of the changes better.
-- Although you can put special code instructions in the vibespec, it is best to keep the vibespec focused on the software system and its specifications. Use your coding agent's instruction files/system prompts to outline coding conventions. For example, for GitHub Copilot, use the `.github/copilot-instructions.md`.
-
-- OLD Define jargon and domain-specific terms in the glossary of the `Domain `section. Place the `Domain` section at the top of the document, immediately after the description.
+- Commit code changes by the LLM often. Better yet, commit vibespec changes and code changes together. In a future update the instructions may include a note to analyze the commit history.
+- Although you can put special code instructions in the vibespec, it is best to keep the vibespec focused on the software system and its specifications. Use your coding agent's instruction files/system prompts to outline coding conventions. For example, for GitHub Copilot, use the `.github/copilot-instructions.md` file.
 
 ### GitHub Copilot
 
@@ -306,8 +303,7 @@ I have attached the vibespec definition.
 
 ### 3 - Ask the LLM to generate code from the Vibespec
 
-Open Claude Code. TBD
-
+Use Claude Code or GitHub Copilot to generate code from the vibespec. 
 
 ## FAQ
 
@@ -316,3 +312,8 @@ An SRD (Software Requirements Document) is typically a high-level document that 
 
 ### Isn't using a vibespec to build a software system like going back to waterfall-based development?
 Not necessarily. While Vibespec does provide a structured approach, it is designed to be flexible and iterative. It allows for continuous refinement and adaptation of the software system as requirements evolve, similar to agile methodologies. The key difference is that Vibespec is optimized for LLMs, enabling more efficient code generation and reducing the need for extensive manual coding.
+
+### Amazon Kiro just released and it encompasses spec-driven development. How is Vibespec different?
+[Amazon Kiro](https://kiro.dev/) is an IDE and a fork of Visual Studio Code (just like Cursor and Windsurf). Vibespec is a specification + instructions for the LLM (although I may develop some basic tooling in the near future) that is open-source and can be used with any LLM, IDE, or coding agent. 
+
+One key difference that Kiro offers is the ability to sync code back to specs. Vibespec will never do that. I believe in the unidirectional flow of specs to code, not the other way around. Otherwise, bugs unintentionally become features, and no one wants that.
