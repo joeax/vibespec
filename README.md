@@ -4,7 +4,7 @@
 
 Vibespec is a specification for describing a software application or system, optimized for an LLM for 
 generating code in a consistent and repeatable way. Instead of ad hoc prompting through trial and error, 
-you describe the software you want in one single file. Vibespecs are incredibly flexible and can be as 
+you describe the software you want in **one single file**. Vibespecs are incredibly flexible and can be as 
 simple or as complex as needed to fully describe the software system. 
 
 **Vibespec is a minimalist approach to spec-driven development.**
@@ -242,6 +242,8 @@ Each coding agent has built-in special tokens that can be used to control the be
 
 ## Examples
 
+I'll be adding more examples over the coming weeks, but here are some to get you started:
+
 - [Simple CRM web app](examples/simple-crm-vibespec.md)
 - [Tetris clone (basic)](examples/tetris-clone-vibespec-basic.md)
 - [Tetris clone (detailed)](examples/tetris-clone-vibespec-detailed.md)
@@ -271,7 +273,7 @@ coming soon:
 ## Limitations
 
 - In many cases, coding agents like GitHub Copilot or Claude Code are working on older data and if you are not explicit in certain implementation details, will attempt to generate code based on this older data.
-- The coding agents will also generate error-prone code. TBD
+- All coding agents are known to generate hallucinated, error-prone code. You can mitigate this using the **Issues** section to describe known bugs and direct your coding agent to fix.
 - While implementing the vibespec, GitHub Copilot will stop repeatedly asking you to confirm the changes it will make. You need to nudge it via prompt to resume the implementation. 
 - Vibespecs are not designed to describe complex enterprise-wide systems or architectures. They are best suited for describing specific software applications or systems, such as web applications, APIs, or libraries.
 
@@ -307,7 +309,7 @@ Use Claude Code or GitHub Copilot to generate code from the vibespec.
 
 ## FAQ
 
-### Why can I just write an SRD and have the LLM generate code from it?
+### Why can't I just write an SRD and have the LLM generate code from it?
 An SRD (Software Requirements Document) is typically a high-level document that outlines the requirements and functionalities of a software system. While it provides a good foundation, it often lacks the detailed structure and specific instructions needed for an LLM to generate code effectively. Vibespec aims to bridge this gap by providing a more structured and detailed specification that can be directly translated into code.
 
 ### Isn't using a vibespec to build a software system like going back to waterfall-based development?
