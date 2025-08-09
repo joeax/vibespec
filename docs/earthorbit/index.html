@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Earth Orbit Visualizer</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" crossorigin src="/assets/index-BNdrIaa-.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DB9I3sPf.css">
+</head>
+<body>
+  <header>
+    <h1>Earth Orbit Visualizer</h1>
+    <div id="date-container">
+      <div>Current date: <span id="current-date"></span></div>
+      <div>Selected date: <span id="selected-date">None</span></div>
+      <input type="datetime-local" id="date-picker">
+      <button id="reset-date">Now</button>
+    </div>
+  </header>
+  <main>
+    <canvas id="orbit-canvas"></canvas>
+    <div id="orbit-box" class="info-box">
+      <div>Distance from Sun: <span id="distance"></span></div>
+      <div>Orbital Speed: <span id="speed"></span></div>
+      <div>Orbital Acceleration: <span id="orbital-acceleration"></span></div>
+      <div>Tangential Acceleration: <span id="tangential-acceleration"></span></div>
+    </div>
+    <div id="orbit-labels"></div>
+  </main>
+
+
+</body>
+</html>
