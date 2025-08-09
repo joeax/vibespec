@@ -247,6 +247,7 @@ I'll be adding more examples over the coming weeks, but here are some to get you
 - [Simple CRM web app](examples/simple-crm-vibespec.md)
 - [Tetris clone (basic)](examples/tetris-clone-vibespec-basic.md)
 - [Tetris clone (detailed)](examples/tetris-clone-vibespec-detailed.md)
+- [Earth Orbit Visualizer](examples/earth-orbit-visualizer-vibespec.md)
 <!--
 coming soon:
 - [Fashion Store with Figma MCP](examples/fashion-store-vibespec.md)
